@@ -1,0 +1,930 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Executors | Semploits - Trusted Exploits for Roblox</title>
+    <meta name="description" content="Discover premium Roblox executors, carefully curated for performance, stability, and safety. Level 8 execution, keyless access, and more.">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #000000;
+            color: #ffffff;
+            overflow-x: hidden;
+            line-height: 1.6;
+            position: relative;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        .bg-effects {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .bg-gradient {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(251, 191, 36, 0.1) 0%, transparent 50%, rgba(245, 158, 11, 0.05) 100%);
+        }
+
+        .bg-orb-1 {
+            position: absolute;
+            top: 25%;
+            left: 25%;
+            width: 384px;
+            height: 384px;
+            background: rgba(251, 191, 36, 0.2);
+            border-radius: 50%;
+            filter: blur(80px);
+        }
+
+        .bg-orb-2 {
+            position: absolute;
+            bottom: 25%;
+            right: 25%;
+            width: 384px;
+            height: 384px;
+            background: rgba(245, 158, 11, 0.15);
+            border-radius: 50%;
+            filter: blur(80px);
+        }
+
+        .header {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 50;
+            transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            width: 95%;
+            max-width: 1536px;
+        }
+
+        .header.scrolled {
+            width: 90%;
+            max-width: 768px;
+        }
+
+        .header-content {
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(251, 191, 36, 0.2);
+            border-radius: 50px;
+            padding: 16px 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .nav-link {
+            color: #9ca3af;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 12px 20px;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            color: #fbbf24;
+            background: rgba(251, 191, 36, 0.1);
+        }
+
+        .header-btn {
+            background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+            color: #000000;
+            padding: 12px 24px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .header-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(251, 191, 36, 0.4);
+        }
+
+        .mobile-menu-toggle {
+            display: none;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(251, 191, 36, 0.2);
+            color: #ffffff;
+            padding: 10px;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .mobile-menu {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(20px);
+            z-index: 100;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.4s ease;
+        }
+
+        .mobile-menu.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .mobile-menu-content {
+            padding: 2rem 1.5rem;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .mobile-menu-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 3rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid rgba(251, 191, 36, 0.2);
+        }
+
+        .mobile-menu-close {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(251, 191, 36, 0.2);
+            color: #ffffff;
+            padding: 12px;
+            border-radius: 12px;
+            cursor: pointer;
+            font-size: 1.2rem;
+        }
+
+        .mobile-nav-links {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-bottom: 3rem;
+        }
+
+        .mobile-nav-link {
+            color: #9ca3af;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 1rem 1.5rem;
+            border-radius: 16px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .mobile-nav-link:hover,
+        .mobile-nav-link.active {
+            color: #fbbf24;
+            background: rgba(251, 191, 36, 0.1);
+            border-color: rgba(251, 191, 36, 0.3);
+        }
+
+        .main-content {
+            position: relative;
+            z-index: 10;
+            padding-top: 120px;
+        }
+
+        .page-header {
+            padding: 4rem 1.5rem 3rem;
+        }
+
+        .page-header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            color: #fbbf24;
+            text-decoration: none;
+            margin-bottom: 2rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .back-link:hover {
+            color: #f59e0b;
+            transform: translateX(-4px);
+        }
+
+        .page-title {
+            font-size: clamp(3rem, 8vw, 6rem);
+            font-weight: 900;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 50%, #d97706 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-align: center;
+        }
+
+        .page-subtitle {
+            font-size: clamp(1.1rem, 3vw, 1.5rem);
+            color: #9ca3af;
+            text-align: center;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .executors-section {
+            padding: 0 1.5rem 6rem;
+        }
+
+        .executors-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .executors-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .executor-card {
+            background: rgba(0, 0, 0, 0.6);
+            border: 1px solid rgba(251, 191, 36, 0.3);
+            border-radius: 24px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .executor-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(251, 191, 36, 0.5);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+        }
+
+        .executor-thumbnail {
+            position: relative;
+            height: 200px;
+            overflow: hidden;
+        }
+
+        .executor-thumbnail img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .executor-thumbnail::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.6), transparent);
+        }
+
+        .featured-badge {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+            color: #000000;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+            z-index: 2;
+        }
+
+        .executor-content {
+            padding: 1.5rem;
+        }
+
+        .executor-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+        }
+
+        .executor-name {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .executor-level {
+            background: rgba(251, 191, 36, 0.2);
+            border: 1px solid rgba(251, 191, 36, 0.4);
+            color: #fbbf24;
+            padding: 0.25rem 0.75rem;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .executor-stats {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+            color: #9ca3af;
+        }
+
+        .executor-stat {
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+        }
+
+        .executor-description {
+            color: #9ca3af;
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .executor-features {
+            margin-bottom: 1.5rem;
+        }
+
+        .features-title {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #fbbf24;
+            margin-bottom: 0.75rem;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.5rem;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.85rem;
+            color: #9ca3af;
+        }
+
+        .feature-dot {
+            width: 6px;
+            height: 6px;
+            background: #fbbf24;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        .executor-buttons {
+            display: flex;
+            gap: 0.75rem;
+        }
+
+        .btn-sunc {
+            flex: 1;
+            background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+            color: #000000;
+            padding: 0.75rem 1.5rem;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 600;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-sunc:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(251, 191, 36, 0.4);
+        }
+
+        .btn-info {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(251, 191, 36, 0.3);
+            color: #fbbf24;
+            padding: 0.75rem;
+            border-radius: 12px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+
+        .btn-info:hover {
+            background: rgba(251, 191, 36, 0.1);
+        }
+
+        .coming-soon-card {
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(251, 191, 36, 0.2);
+            border-radius: 24px;
+            padding: 3rem 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .coming-soon-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(251, 191, 36, 0.05) 0%, transparent 100%);
+        }
+
+        .coming-soon-icon {
+            width: 64px;
+            height: 64px;
+            background: linear-gradient(135deg, rgba(251, 191, 36, 0.2) 0%, rgba(245, 158, 11, 0.2) 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+        }
+
+        .coming-soon-icon i {
+            font-size: 2rem;
+            color: #fbbf24;
+        }
+
+        .coming-soon-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: #9ca3af;
+            margin-bottom: 0.5rem;
+        }
+
+        .coming-soon-description {
+            color: #6b7280;
+            margin-bottom: 1.5rem;
+        }
+
+        .btn-suggest {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(251, 191, 36, 0.3);
+            color: #fbbf24;
+            padding: 0.75rem 1.5rem;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-suggest:hover {
+            background: rgba(251, 191, 36, 0.1);
+        }
+
+        .submit-section {
+            padding: 6rem 1.5rem;
+            background: linear-gradient(135deg, rgba(0, 0, 0, 1) 0%, rgba(245, 158, 11, 0.05) 50%, rgba(0, 0, 0, 1) 100%);
+        }
+
+        .submit-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .submit-card {
+            background: rgba(0, 0, 0, 0.6);
+            border: 1px solid rgba(251, 191, 36, 0.3);
+            border-radius: 24px;
+            padding: 3rem;
+            backdrop-filter: blur(20px);
+        }
+
+        .submit-title {
+            font-size: clamp(2rem, 6vw, 3rem);
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .submit-description {
+            font-size: clamp(1rem, 3vw, 1.25rem);
+            color: #9ca3af;
+            margin-bottom: 2rem;
+        }
+
+        .submit-buttons {
+            display: flex;
+            flex-direction: row;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-telegram {
+            background: linear-gradient(135deg, #0088cc 0%, #006699 100%);
+            color: #ffffff;
+            padding: 1rem 2rem;
+            border-radius: 16px;
+            text-decoration: none;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-telegram:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 136, 204, 0.4);
+        }
+
+        .btn-discord {
+            background: linear-gradient(135deg, #5865f2 0%, #4752c4 100%);
+            color: #ffffff;
+            padding: 1rem 2rem;
+            border-radius: 16px;
+            text-decoration: none;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-discord:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(88, 101, 242, 0.4);
+        }
+
+        .scroll-reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .scroll-reveal.revealed {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        @media (max-width: 768px) {
+            .header {
+                width: calc(100% - 20px);
+                top: 10px;
+                left: 10px;
+                right: 10px;
+                transform: none;
+            }
+
+            .header.scrolled {
+                width: calc(100% - 20px);
+                transform: none;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .mobile-menu-toggle {
+                display: block;
+            }
+
+            .mobile-menu {
+                display: block;
+            }
+
+            .executors-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .submit-buttons {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .submit-buttons .btn-telegram,
+            .submit-buttons .btn-discord {
+                width: 100%;
+                max-width: 300px;
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .executors-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .executor-card {
+                margin: 0 0.5rem;
+            }
+        }
+
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: rgba(0, 0, 0, 0.1);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(135deg, #fbbf24, #f59e0b);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(135deg, #f59e0b, #d97706);
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-effects">
+        <div class="bg-gradient"></div>
+        <div class="bg-orb-1"></div>
+        <div class="bg-orb-2"></div>
+    </div>
+
+    <header class="header" id="header">
+        <div class="header-content">
+            <a href="index.html" class="logo">Semploits</a>
+            
+            <nav class="nav-links">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="executors.html" class="nav-link">Executors</a>
+                <a href="scripts.html" class="nav-link active">Scripts</a>
+            </nav>
+
+            <button class="mobile-menu-toggle" id="mobileMenuToggle">
+                <i class="fas fa-bars"></i>
+            </button>
+            
+            <a href="https://t.me/sempillerian" class="header-btn">
+                Contact Us
+            </a>
+        </div>
+    </header>
+
+    <div class="mobile-menu" id="mobileMenu">
+        <div class="mobile-menu-content">
+            <div class="mobile-menu-header">
+                <a href="index.html" class="logo">Semploits</a>
+                <button class="mobile-menu-close" id="mobileMenuClose">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <nav class="mobile-nav-links">
+                <a href="index.html" class="mobile-nav-link">Home</a>
+                <a href="executors.html" class="mobile-nav-link">Executors</a>
+                <a href="scripts.html" class="mobile-nav-link active">Scripts</a>
+            </nav>
+            <a href="https://t.me/sempillerian" class="header-btn">
+                Contact Us
+            </a>
+        </div>
+    </div>
+
+    <main class="main-content">
+        <section class="page-header">
+            <div class="page-header-container">
+                <a href="index.html" class="back-link scroll-reveal">
+                    <i class="fas fa-arrow-left" style="margin-right: 0.5rem;"></i>
+                </a>
+                
+                <div class="text-center">
+                    <h1 class="page-title scroll-reveal">Scripts</h1>
+                    <p class="page-subtitle scroll-reveal">
+                        Discover the best roblox script for free.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <section class="executors-section">
+            <div class="executors-container">
+                <div class="executors-grid">
+                    <div class="executor-card scroll-reveal">
+                        <div class="executor-thumbnail">
+                            <img src="lithium.png" alt="best script interface">
+                        </div>
+                        
+                        <div class="executor-content">
+                            <div class="executor-header">
+                                <h3 class="executor-name">Lithium</h3>
+                                <span class="executor-level">Arsenal</span>
+                            </div>
+                            
+                            <div class="executor-stats">
+                                <div class="executor-stat">
+                                    <i class="fas fa-bolt"></i>
+                                    Free
+                                </div>
+                                <div class="executor-stat">
+                                    <i class="fas fa-key"></i>
+                                    Keyless
+                                </div>
+                            </div>
+                            
+                            <p class="executor-description">
+                                Powerful script for arsenal for free and no key.
+                            </p>
+                            
+                            <div class="executor-features">
+                                <h4 class="features-title">Features:</h4>
+                                <div class="features-grid">
+                                    <div class="feature-item">
+                                        <div class="feature-dot"></div>
+                                        Kill All
+                                    </div>
+                                    <div class="feature-item">
+                                        <div class="feature-dot"></div>
+                                        Gun Mods
+                                    </div>
+                                    <div class="feature-item">
+                                        <div class="feature-dot"></div>
+                                        Silent Aim
+                                    </div>
+                                    <div class="feature-item">
+                                        <div class="feature-dot"></div>
+                                        Wallbang
+                                    </div>
+                                    <div class="feature-item">
+                                        <div class="feature-dot"></div>
+                                        Bullet Annoy
+                                    </div>
+                                    <div class="feature-item">
+                                        <div class="feature-dot"></div>
+                                        Player Mods
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="executor-buttons">
+                                <a href="https://lithium.semp.cloud/" class="btn-sunc">Get Script</a>
+                                <a href="https://t.me/sempillerian/" class="btn-info">
+                                    <i class="fas fa-info-circle"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="coming-soon-card scroll-reveal">
+                        <div class="coming-soon-icon">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <h3 class="coming-soon-title">More Coming Soon</h3>
+                        <p class="coming-soon-description">
+                            We're constantly adding new premium executors to our collection
+                        </p>
+                        <a href="https://t.me/sempillerian" target="_blank" class="btn-suggest">
+                            <i class="fas fa-comments"></i>
+                            Suggest Script
+                        </a>
+                    </div>
+
+                    <div class="coming-soon-card scroll-reveal">
+                        <div class="coming-soon-icon">
+                            <i class="fas fa-code"></i>
+                        </div>
+                        <h3 class="coming-soon-title">Submit Your Script</h3>
+                        <p class="coming-soon-description">
+                            Have a quality script? Get it featured on Semploits
+                        </p>
+                        <a href="https://discord.com/app/users/1331688037024923690" target="_blank" class="btn-suggest">
+                            <i class="fab fa-discord"></i>
+                            Contact Us
+                        </a>
+                    </div>
+        </section>
+    </main>
+
+    <script>
+        const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+        const mobileMenu = document.getElementById('mobileMenu');
+        const mobileMenuClose = document.getElementById('mobileMenuClose');
+
+        function toggleMobileMenu() {
+            mobileMenu.classList.toggle('active');
+            document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : '';
+        }
+
+        function closeMobileMenu() {
+            mobileMenu.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        mobileMenuToggle.addEventListener('click', toggleMobileMenu);
+        mobileMenuClose.addEventListener('click', closeMobileMenu);
+
+        document.querySelectorAll('.mobile-nav-link').forEach(link => {
+            link.addEventListener('click', closeMobileMenu);
+        });
+
+        mobileMenu.addEventListener('click', function(e) {
+            if (e.target === mobileMenu) {
+                closeMobileMenu();
+            }
+        });
+
+        window.addEventListener('scroll', function() {
+            const header = document.getElementById('header');
+            if (window.scrollY > 100) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('revealed');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.scroll-reveal').forEach(el => {
+            observer.observe(el);
+        });
+
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && mobileMenu.classList.contains('active')) {
+                closeMobileMenu();
+            }
+        });
+    </script>
+</body>
+</html>
